@@ -6,10 +6,6 @@ function initialize_fc_lite() {
     // 清除之前的内容
     root.innerHTML = '';
 
-    const randomArticleContainer = document.createElement('div');
-    randomArticleContainer.id = 'random-article';
-    root.appendChild(randomArticleContainer);
-
     const container = document.createElement('div');
     container.className = 'articles-container';
     container.id = 'articles-container';
@@ -17,7 +13,7 @@ function initialize_fc_lite() {
     
     const loadMoreBtn = document.createElement('button');
     loadMoreBtn.id = 'load-more-btn';
-    loadMoreBtn.innerText = '再来亿点';
+    loadMoreBtn.innerText = '还没看够？';
     root.appendChild(loadMoreBtn);
 
     // 创建统计信息容器
@@ -59,22 +55,11 @@ function initialize_fc_lite() {
         // 处理统计数据
         const stats = data.statistical_data;
         statsContainer.innerHTML = `
-            <div>Powered by: <a href="https://github.com/willow-god/Friend-Circle-Lite" target="_blank">FriendCircleLite</a><br></div>
-            <div>Designed By: <a href="https://www.liushen.fun/" target="_blank">LiuShen</a><br></div>
+            <div>Powered by: <a href="https://github.com/lazyingman/Friend-Circle-Lite" target="_blank">FriendCircleLite</a><br></div>
             <div>订阅:${stats.friends_num}   活跃:${stats.active_num}   总文章数:${stats.article_num}<br></div>
             <div>更新时间:${stats.last_updated_time}</div>
         `;
 
-        // 随机友链卡片
-        const randomArticle = allArticles[Math.floor(Math.random() * allArticles.length)];
-        randomArticleContainer.innerHTML = `
-            <div class="random-container">
-                <div class="random-container-title">随机钓鱼</div>
-                <div class="random-title">${randomArticle.title}</div>
-                <div class="random-author">作者: ${randomArticle.author}</div>
-            </div>
-            <button class="random-link-button" onclick="window.open('${randomArticle.link}', '_blank')">过去转转</button>
-        `;
 
         const articles = allArticles.slice(start, start + UserConfig.page_turning_number);
 
@@ -104,14 +89,8 @@ function initialize_fc_lite() {
 
             const date = document.createElement('div');
             date.className = 'card-date';
-            date.innerText = "🗓️" + article.created.substring(0, 10);
+            date.innerText = article.created.substring(0, 10);
             card.appendChild(date);
-
-            const bgImg = document.createElement('img');
-            bgImg.className = 'card-bg no-lightbox';
-            bgImg.src = article.avatar || UserConfig.error_img;
-            bgImg.onerror = () => bgImg.src = UserConfig.error_img; // 头像加载失败时使用默认头像
-            card.appendChild(bgImg);
 
             container.appendChild(card);
         });
@@ -131,10 +110,11 @@ function initialize_fc_lite() {
             modal.className = 'modal';
             modal.innerHTML = `
             <div class="modal-content">
-                <img id="modal-author-avatar" src="" alt="">
-                <a id="modal-author-name-link"></a>
+                <div id="modal-author">
+					<img id="modal-author-avatar" src="" alt="">
+					<a id="modal-author-name-link"></a>
+				</div>
                 <div id="modal-articles-container"></div>
-                <img id="modal-bg" src="" alt="">
             </div>
             `;
             root.appendChild(modal);
@@ -149,8 +129,6 @@ function initialize_fc_lite() {
         modalArticlesContainer.innerHTML = ''; // 清空之前的内容
         modalAuthorAvatar.src = avatar  || UserConfig.error_img; // 使用默认头像
         modalAuthorAvatar.onerror = () => modalAuthorAvatar.src = UserConfig.error_img; // 头像加载失败时使用默认头像
-        modalBg.src = avatar || UserConfig.error_img; // 使用默认头像
-        modalBg.onerror = () => modalBg.src = UserConfig.error_img; // 头像加载失败时使用默认头像
         modalAuthorNameLink.innerText = author;
         modalAuthorNameLink.href = new URL(link).origin;
 
@@ -166,11 +144,6 @@ function initialize_fc_lite() {
             title.href = article.link;
             title.target = '_blank';
             articleDiv.appendChild(title);
-
-            const date = document.createElement('div');
-            date.className = 'modal-article-date';
-            date.innerText = "📅" + article.created.substring(0, 10);
-            articleDiv.appendChild(date);
 
             modalArticlesContainer.appendChild(articleDiv);
         });
