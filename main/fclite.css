@@ -47,6 +47,8 @@ body {
 
 #friend-circle-lite-root {
 	width: 100%;
+	padding: 5px;
+	margin-top: 20px;
 }
 
 .modal {
@@ -76,7 +78,7 @@ body {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	width: 350px;
+	width: 390px;
 	background-color: var(--modal-content-bg-color);
 	padding: 20px;
 	border: 1px solid var(--border-color);
@@ -106,6 +108,7 @@ body {
 	width: 110px;
 	height: 110px;
 	transition: all 0.5s;
+	max-width: fit-content;
 }
 
 #modal-author-avatar:hover {
@@ -116,7 +119,6 @@ body {
 	display: block;
 	text-align: center;
 	font-size: 15px;
-	margin: 10px 0;
 	color: var(--hover-color);
 	text-decoration: none;
 }
@@ -160,7 +162,7 @@ body {
 
 .articles-container {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
 	gap: 15px;
 	width: 100%;
 }
@@ -175,7 +177,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	height: 90px;
+	height: 110px;
 	transition: border 0.3s;
 }
 
