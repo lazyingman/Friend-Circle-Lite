@@ -2,7 +2,7 @@ name: Friend Circle Lite
 
 on:
   schedule:
-    - cron: "0 */4 * * *"
+    - cron: "0 */24 * * *"  # 每天的 00:00 执行一次
   workflow_dispatch:
 
 env:
@@ -72,10 +72,10 @@ jobs:
         git push --force https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:page
 
     - name: Delete Workflow Runs
-      uses: Mattraks/delete-workflow-runs@v2
+      uses: Mattraks/delete-workflow-runs@v2 # 使用第三方 Action
       with:
-        retain_days: 30
-        keep_minimum_runs: 6
+        retain_days: 30 # 保留最近 30 天内的运行记录
+        keep_minimum_runs: 6 # 保留至少 6 个运行记录
 
   keepalive-workflow:
     name: Keepalive Workflow
@@ -85,8 +85,4 @@ jobs:
     permissions:
       actions: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: gautamkrishnar/keepalive-workflow@v2
-        with:
-          committer_username: "github-actions[bot]"
-          committer_email: "github-actions[bot]@users.noreply.github.com"
+      - uses: liskin/gh-workflow-keepalive@v1
