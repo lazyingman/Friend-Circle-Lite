@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="https://btf.lazyingman.cn/cover%2Fhome%2Fpyq.webp" type="image/x-icon">
+    <link rel="shortcut icon" href="https://btf.lazyingman.cn/cover%2Fhome%2Fpyq.webp" type="image/x-icon">
+    <meta name="description" content="🐱一个精简版，无后端，且仅利用github action运行的精简版友链朋友圈程序，兼容fc的json格式信息，同时支持推送友圈更新，支持他人订阅个人站点并在更新时发送邮箱推送。">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frient-Circle-Lite</title>
+</head>
+<style>
+    .root-container {
+        margin: 0 auto;
+        padding: 20px;
+    }
+</style>
+
+<body>
+    <div class="root-container" style="max-width: 1000px;">
+        <div id="friend-circle-lite-root"></div>
+    </div>
+<script>
+    if (typeof UserConfig === 'undefined') {
+        var UserConfig = {
+            // 填写你的fc Lite地址
+            private_api_url: './',
+            // 点击加载更多时，一次最多加载几篇文章，默认20
+            page_turning_number: 24,
+            // 头像加载失败时，默认头像地址
+            error_img: 'https://i.p-i.vip/30/20240815-66bced9226a36.webp', // https://pic.imgdb.cn/item/6695daa4d9c307b7e953ee3d.jpg
+        }
+    }
+</script>
+<link rel="stylesheet" href="./main/fclite.css">
+<script src="./main/fclite.js"></script>
+</body>
+
+</html>
